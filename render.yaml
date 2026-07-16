@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: mariaborbon-es
+    runtime: static
+    staticPublishPath: .
+    buildCommand: ""
+    pullRequestPreviewsEnabled: true
