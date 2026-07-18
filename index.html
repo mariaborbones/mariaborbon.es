@@ -4,40 +4,208 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>María Borbonés</title>
-  <meta name="description" content="Sitio web personal de María Borbonés">
+  <meta name="description" content="Sitio web personal de María Borbonés — madre, AI lover, y creadora de proyectos personales y profesionales">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
   <header class="site-header">
-    <nav>
-      <a href="#home" class="logo">María Borbonés</a>
-      <ul class="nav-links">
-        <li><a href="#about">Sobre mí</a></li>
-        <li><a href="#work">Proyectos</a></li>
-        <li><a href="#contact">Contacto</a></li>
-      </ul>
-    </nav>
+    <span class="logo">María Borbonés</span>
+    <a class="header-contact" href="mailto:borgarmar@gmail.com">Contacto</a>
   </header>
 
+  <div class="scroll-cue">
+    <span>Desliza para vivir mi día</span>
+    <span class="scroll-cue-arrow">→</span>
+  </div>
+
+  <div class="stats-hud">
+    <p class="stats-hud-title">Mi día</p>
+    <div class="stat-item">
+      <span class="stat-icon">🔋</span>
+      <div class="stat-track"><div class="stat-fill fill-battery"></div></div>
+      <span class="stat-value value-battery">100%</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-icon">❤️</span>
+      <div class="stat-track"><div class="stat-fill fill-love"></div></div>
+      <span class="stat-value value-love">0%</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-icon">💪</span>
+      <div class="stat-track"><div class="stat-fill fill-health"></div></div>
+      <span class="stat-value value-health">0%</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-icon">🧠</span>
+      <div class="stat-track"><div class="stat-fill fill-knowledge"></div></div>
+      <span class="stat-value value-knowledge">0%</span>
+    </div>
+  </div>
+
+  <section class="scene">
+    <div class="sky"></div>
+    <div class="clouds"></div>
+
+    <div class="world" id="world">
+
+      <div class="zone zone-gym">
+        <div class="building-back"></div>
+        <div class="building gym">
+          <div class="gym-window"></div>
+          <div class="door door-gym"></div>
+        </div>
+        <div class="sign sign-gym"><span class="sign-icon">🏋️</span><span class="sign-label">Gimnasio</span></div>
+      </div>
+
+      <div class="zone zone-home-morning">
+        <div class="building-back"></div>
+        <div class="building house1"><div class="roof"></div><div class="door"></div><div class="window"></div></div>
+        <div class="building house2"><div class="roof roof2"></div><div class="door"></div><div class="window"></div><div class="window window2"></div></div>
+        <div class="sign"><span class="sign-icon">🚿</span><span class="sign-label">Ducha y desayuno</span></div>
+      </div>
+
+      <div class="zone zone-commute">
+        <div class="street-prop lamp"></div>
+        <div class="street-prop tree"></div>
+        <div class="sign"><span class="sign-icon">🚗</span><span class="sign-label">Camino al trabajo</span></div>
+      </div>
+
+      <div class="zone zone-verti">
+        <div class="building-back"></div>
+        <div class="building verti-office">
+          <div class="office-windows"></div>
+        </div>
+        <div class="sign sign-verti"><span class="verti-runner"></span><span class="verti-logo">verti</span></div>
+      </div>
+
+      <div class="zone zone-school">
+        <div class="building-back"></div>
+        <div class="building school">
+          <div class="roof roof-school"></div>
+          <div class="flagpole"><div class="flag"></div></div>
+          <div class="door door-school"></div>
+          <div class="window window-school w1"></div>
+          <div class="window window-school w2"></div>
+        </div>
+        <div class="sign"><span class="sign-icon">🎒</span><span class="sign-label">Colegio</span></div>
+      </div>
+
+      <div class="zone zone-market">
+        <div class="building-back"></div>
+        <div class="building market">
+          <div class="awning"></div>
+          <div class="market-window"></div>
+          <div class="door door-market"></div>
+        </div>
+        <div class="sign"><span class="sign-icon">🛒</span><span class="sign-label">Súper</span></div>
+      </div>
+
+      <div class="zone zone-home-evening">
+        <div class="building-back"></div>
+        <div class="building house1"><div class="roof"></div><div class="door lit"></div><div class="window lit"></div></div>
+        <div class="building house2"><div class="roof roof2"></div><div class="door lit"></div><div class="window lit"></div><div class="window window2 lit"></div></div>
+        <div class="sign"><span class="sign-icon">🏠</span><span class="sign-label">En casa</span></div>
+      </div>
+
+    </div>
+
+    <div class="ground"></div>
+
+    <div class="character-group">
+      <div class="kids-group">
+        <div class="figure girl">
+          <div class="head"><div class="hair hair-girl"></div></div>
+          <div class="body body-girl"></div>
+          <div class="arm arm-left"></div>
+          <div class="arm arm-right"></div>
+          <div class="leg leg-left"></div>
+          <div class="leg leg-right"></div>
+        </div>
+
+        <div class="figure boy">
+          <div class="head"><div class="hair hair-boy"></div></div>
+          <div class="body body-boy"></div>
+          <div class="arm arm-left"></div>
+          <div class="arm arm-right"></div>
+          <div class="leg leg-left"></div>
+          <div class="leg leg-right"></div>
+        </div>
+
+        <div class="stroller">
+          <div class="stroller-handle"></div>
+          <div class="stroller-canopy"></div>
+          <div class="stroller-body"></div>
+          <div class="stroller-wheel wheel-back"></div>
+          <div class="stroller-wheel wheel-front"></div>
+        </div>
+      </div>
+
+      <div class="mum-jump">
+        <div class="figure mum">
+          <div class="question-block">?</div>
+          <div class="head"><div class="hair hair-mum"></div></div>
+          <div class="body body-mum"></div>
+          <div class="arm arm-left"></div>
+          <div class="arm arm-right"></div>
+          <div class="leg leg-left"></div>
+          <div class="leg leg-right"></div>
+        </div>
+      </div>
+
+      <div class="family-car">
+        <div class="car-body">
+          <div class="car-window"><div class="car-head"><div class="car-hair"></div></div></div>
+        </div>
+        <div class="car-wheel wheel-a"></div>
+        <div class="car-wheel wheel-b"></div>
+      </div>
+    </div>
+
+    <div class="caption">
+      <p class="caption-eyebrow"></p>
+      <h2 class="caption-title"></h2>
+      <p class="caption-subtitle"></p>
+    </div>
+
+    <div class="progress-track"><div class="progress-fill"></div></div>
+  </section>
+
+  <section class="evening">
+    <div class="evening-card">
+      <span class="evening-icon">🛁</span>
+      <p class="evening-time">19:30</p>
+      <h3>Duchas de los peques</h3>
+    </div>
+    <div class="evening-card">
+      <span class="evening-icon">🍽️</span>
+      <p class="evening-time">20:00</p>
+      <h3>Cocinamos y cenamos</h3>
+    </div>
+    <div class="evening-card">
+      <span class="evening-icon">📖</span>
+      <p class="evening-time">20:30</p>
+      <h3>Cuento y a dormir</h3>
+    </div>
+  </section>
+
   <main>
-    <section id="home" class="hero">
-      <h1>Hola, soy María</h1>
-      <p>Bienvenida a mi web personal.</p>
-    </section>
-
-    <section id="about">
-      <h2>Sobre mí</h2>
-      <p>Aquí va una breve presentación.</p>
-    </section>
-
-    <section id="work">
+    <section id="work" class="content-section">
+      <p class="section-eyebrow">Trabajo</p>
       <h2>Proyectos</h2>
-      <p>Próximamente.</p>
+      <p>Un espacio para compartir lo que construyo, personal y profesionalmente.</p>
+      <ul class="project-list">
+        <li>
+          <h3>Próximamente</h3>
+          <p>Aquí iré añadiendo mis proyectos a medida que los publique.</p>
+        </li>
+      </ul>
     </section>
 
-    <section id="contact">
+    <section id="contact" class="content-section">
+      <p class="section-eyebrow">Hablemos</p>
       <h2>Contacto</h2>
-      <p>Puedes escribirme a <a href="mailto:borgarmar@gmail.com">borgarmar@gmail.com</a>.</p>
+      <p>¿Quieres saludar o colaborar en algo? Escríbeme.</p>
+      <a class="contact-link" href="mailto:borgarmar@gmail.com">borgarmar@gmail.com</a>
     </section>
   </main>
 
@@ -45,6 +213,8 @@
     <p>&copy; <span id="year"></span> María Borbonés</p>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>
