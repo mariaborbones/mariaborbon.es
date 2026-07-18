@@ -19,10 +19,9 @@ const eveningStats = [
 ];
 
 const DRIVING_ZONE = 2;
-const SCHOOL_ZONE = 4;
 const KIDS_JOIN_ZONE = 5;
-// Kids appear once she's walked past the school building, just before súper.
-const KIDS_JOIN_PROGRESS = (SCHOOL_ZONE + 0.85) / zones.length;
+const ZONE_WIDTH = 1600;
+const BOX_CENTER_OFFSET = 1470; // matches CSS: .question-block { left: 1440px; width: 60px; }
 
 const world = document.getElementById("world");
 const scene = document.querySelector(".scene");
@@ -37,7 +36,6 @@ const progressFill = document.querySelector(".progress-fill");
 const scrollCue = document.querySelector(".scroll-cue");
 const mumFigure = document.querySelector(".mum");
 const mumJump = document.querySelector(".mum-jump");
-const questionBlock = document.querySelector(".question-block");
 const kidsGroup = document.querySelector(".kids-group");
 const familyCar = document.querySelector(".family-car");
 const statsHud = document.querySelector(".stats-hud");
@@ -64,10 +62,28 @@ const gait = [
 
 const wheels = document.querySelectorAll(".stroller-wheel, .car-wheel");
 
+const zoneEls = document.querySelectorAll(".zone");
+const rewardBoxes = [
+  { zoneIndex: 0, stats: zones[1].stats },
+  { zoneIndex: 3, stats: zones[4].stats },
+  { zoneIndex: 4, stats: zones[KIDS_JOIN_ZONE].stats, revealsKids: true },
+  { zoneIndex: 5, stats: zones[6].stats },
+].map((box) => {
+  const el = zoneEls[box.zoneIndex].querySelector(".question-block");
+  return {
+    ...box,
+    el,
+    icon: el.dataset.reward,
+    worldX: box.zoneIndex * ZONE_WIDTH + BOX_CENTER_OFFSET,
+    hit: false,
+  };
+});
+const kidsRewardBox = rewardBoxes.find((box) => box.revealsKids);
+
 let lastZoneIndex = -1;
 let captionTimer = null;
 let kidsVisible = false;
-let lastStats = { ...zones[0].stats };
+let mumCenterX = 0;
 
 function updateCaption(index) {
   const zone = zones[index];
@@ -87,22 +103,22 @@ function updateCharacters(index) {
   gsap.to(familyCar, { opacity: isDriving ? 1 : 0, duration: 0.3, overwrite: true });
 }
 
-function triggerBonk(icon) {
-  gsap.killTweensOf([mumJump, questionBlock]);
+function triggerBonk(icon, blockEl) {
+  gsap.killTweensOf([mumJump, blockEl]);
   const tl = gsap.timeline();
   tl.to(mumJump, { y: -34, duration: 0.18, ease: "power2.out" })
-    .to(questionBlock, { y: -7, duration: 0.09, ease: "power1.out" }, "<0.13")
-    .to(questionBlock, { y: 0, duration: 0.14, ease: "power1.in" })
+    .to(blockEl, { y: -8, duration: 0.09, ease: "power1.out" }, "<0.13")
+    .to(blockEl, { y: 0, duration: 0.14, ease: "power1.in" })
     .to(mumJump, { y: 0, duration: 0.24, ease: "bounce.out" }, "<-0.05");
 
   const popup = document.createElement("span");
   popup.className = "stat-popup";
   popup.textContent = icon;
-  questionBlock.appendChild(popup);
+  blockEl.appendChild(popup);
   gsap.fromTo(
     popup,
     { y: 0, opacity: 1 },
-    { y: -42, opacity: 0, duration: 0.9, ease: "power1.out", onComplete: () => popup.remove() }
+    { y: -50, opacity: 0, duration: 0.9, ease: "power1.out", onComplete: () => popup.remove() }
   );
 }
 
@@ -116,16 +132,32 @@ function updateStats(stats) {
   valueLove.textContent = `${Math.round(stats.love)}%`;
   valueHealth.textContent = `${Math.round(stats.health)}%`;
   valueKnowledge.textContent = `${Math.round(stats.knowledge)}%`;
+}
 
-  if (stats.health > lastStats.health + 3) triggerBonk("💪");
-  else if (stats.knowledge > lastStats.knowledge + 3) triggerBonk("🧠");
-  else if (stats.love > lastStats.love + 3) triggerBonk("❤️");
+function checkKidsVisibility(distance) {
+  const shouldShow = kidsRewardBox.worldX - distance <= mumCenterX;
+  if (shouldShow !== kidsVisible) {
+    kidsVisible = shouldShow;
+    gsap.to(kidsGroup, { opacity: shouldShow ? 1 : 0, duration: 0.3, overwrite: true });
+  }
+}
 
-  lastStats = stats;
+function checkRewardBoxes(distance) {
+  rewardBoxes.forEach((box) => {
+    if (box.hit) return;
+    if (box.worldX - distance <= mumCenterX) {
+      box.hit = true;
+      box.el.classList.add("hit");
+      updateStats(box.stats);
+      triggerBonk(box.icon, box.el);
+    }
+  });
 }
 
 function setupWalkScene() {
   const maxShift = world.scrollWidth - window.innerWidth;
+  const mumRect = mumFigure.getBoundingClientRect();
+  mumCenterX = mumRect.left + mumRect.width / 2;
 
   const scrollTween = gsap.to(world, {
     x: -maxShift,
@@ -158,12 +190,8 @@ function setupWalkScene() {
 
         wheels.forEach((wheel) => gsap.set(wheel, { rotate: distance * 1.2 }));
 
-        const showKids = progress >= KIDS_JOIN_PROGRESS;
-        if (showKids !== kidsVisible) {
-          kidsVisible = showKids;
-          gsap.to(kidsGroup, { opacity: showKids ? 1 : 0, duration: 0.3, overwrite: true });
-          if (showKids) updateStats(zones[KIDS_JOIN_ZONE].stats);
-        }
+        checkKidsVisibility(distance);
+        checkRewardBoxes(distance);
 
         const zoneIndex = Math.min(zones.length - 1, Math.floor(progress * zones.length));
         if (zoneIndex !== lastZoneIndex) {
