@@ -931,6 +931,12 @@ a:hover {
   color: var(--color-text);
 }
 
+.worklife-hint {
+  margin: 0.6rem 0 0;
+  font-size: 0.95rem;
+  color: var(--color-text-dim);
+}
+
 .worklife-board {
   position: relative;
   max-width: 1100px;
@@ -941,6 +947,40 @@ a:hover {
     #fffdf7;
   border-radius: 28px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08), inset 0 0 0 2px rgba(0, 0, 0, 0.05);
+}
+
+.worklife-board::before,
+.worklife-board::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.3;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.worklife-board::before {
+  content: "✎";
+  top: -16px;
+  left: 28px;
+  transform: rotate(-16deg);
+  color: var(--color-text);
+}
+
+.worklife-board::after {
+  content: "★";
+  bottom: -10px;
+  right: 34px;
+  font-size: 1.4rem;
+  transform: rotate(14deg);
+  color: var(--color-accent);
+}
+
+@media (max-width: 600px) {
+  .worklife-board::before,
+  .worklife-board::after {
+    display: none;
+  }
 }
 
 .worklife-grid {
@@ -966,6 +1006,7 @@ a:hover {
 
 .wl-node {
   --node-color: var(--color-accent);
+  --rot: 0deg;
   min-width: 0;
   background: #fff;
   border: 2px solid var(--node-color);
@@ -974,15 +1015,48 @@ a:hover {
   padding: 1.2rem 1.4rem;
   overflow-wrap: break-word;
   cursor: pointer;
+  transform: rotate(var(--rot));
   transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
-.wl-node:nth-child(odd) { transform: rotate(-0.6deg); }
-.wl-node:nth-child(even) { transform: rotate(0.6deg); }
+.wl-node:nth-child(odd) { --rot: -0.6deg; }
+.wl-node:nth-child(even) { --rot: 0.6deg; }
 
 .wl-node:hover,
 .wl-node:focus-visible {
   box-shadow: 5px 6px 0 rgba(0, 0, 0, 0.08);
+  transform: rotate(var(--rot)) translateY(-3px);
+}
+
+@keyframes wl-wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-10deg); }
+  75% { transform: rotate(10deg); }
+}
+
+.wl-node:hover .wl-icon {
+  display: inline-block;
+  animation: wl-wiggle 0.4s ease-in-out;
+}
+
+@keyframes wl-pop {
+  0% { transform: scale(1) rotate(0); }
+  35% { transform: scale(1.35) rotate(-10deg); }
+  65% { transform: scale(0.95) rotate(6deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+
+.wl-node.open .wl-head .wl-icon {
+  display: inline-block;
+  animation: wl-pop 0.5s ease;
+}
+
+.wl-pop-emoji {
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  font-size: 1.3rem;
+  pointer-events: none;
 }
 
 .wl-node:focus-visible {
@@ -1015,6 +1089,7 @@ a:hover {
 }
 
 .wl-icon {
+  position: relative;
   font-size: 1.5rem;
 }
 
@@ -1222,27 +1297,47 @@ main {
 }
 
 .project-card {
+  --pc: var(--color-accent);
   background: #fff;
-  border: 2px dashed #ddd;
+  border: 2px dashed var(--pc);
   border-radius: 16px;
   padding: 1.75rem 1.25rem;
   text-align: center;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  transform: rotate(var(--rot, 0deg));
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-card:nth-child(3n+1) { --pc: #2a5adf; --rot: -1deg; }
+.project-card:nth-child(3n+2) { --pc: #e0607e; --rot: 1deg; }
+.project-card:nth-child(3n+3) { --pc: #4c8c6b; --rot: -1deg; }
+
+.project-card:hover {
+  transform: rotate(var(--rot, 0deg)) translateY(-4px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.1);
+}
+
+.project-card:hover .project-icon {
+  animation: wl-wiggle 0.4s ease-in-out;
 }
 
 .project-icon {
   font-size: 1.8rem;
-  display: block;
+  display: inline-block;
   margin-bottom: 0.6rem;
 }
 
 .project-card h3 {
+  font-family: "Caveat", "Segoe UI", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
   margin: 0 0 0.35rem;
-  color: var(--color-text);
+  color: var(--pc);
 }
 
 .project-card p {
   margin: 0;
+  color: var(--color-text-dim);
 }
 
 .contact-link {

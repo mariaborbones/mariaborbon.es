@@ -186,11 +186,26 @@ window.addEventListener("load", () => {
   setupWorklifeCards();
 });
 
+function popWorklifeIcon(node) {
+  const icon = node.querySelector(".wl-icon");
+  const popup = document.createElement("span");
+  popup.className = "wl-pop-emoji";
+  popup.textContent = icon.textContent;
+  popup.setAttribute("aria-hidden", "true");
+  icon.appendChild(popup);
+  gsap.fromTo(
+    popup,
+    { y: 0, x: "-50%", opacity: 1, scale: 1 },
+    { y: -30, opacity: 0, scale: 1.4, duration: 0.7, ease: "power1.out", onComplete: () => popup.remove() }
+  );
+}
+
 function setupWorklifeCards() {
   document.querySelectorAll(".wl-node").forEach((node) => {
     const toggle = () => {
       const isOpen = node.classList.toggle("open");
       node.setAttribute("aria-expanded", String(isOpen));
+      if (isOpen) popWorklifeIcon(node);
     };
     node.addEventListener("click", toggle);
     node.addEventListener("keydown", (event) => {
