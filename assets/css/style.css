@@ -83,6 +83,75 @@ a:hover {
   50% { transform: translateX(6px); }
 }
 
+.game-legend {
+  position: absolute;
+  z-index: 20;
+  top: 4.75rem;
+  right: 1.5rem;
+  max-width: 230px;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(6px);
+  padding: 1.1rem 1.3rem;
+  border-radius: 20px;
+  border: 2px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
+}
+
+.game-legend-title {
+  margin: 0 0 0.5rem;
+  font-family: "Caveat", "Segoe UI", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.game-legend-text {
+  margin: 0 0 0.65rem;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--color-text-dim);
+}
+
+.game-legend-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.game-legend-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (max-width: 700px) {
+  .game-legend {
+    top: auto;
+    bottom: 1.5rem;
+    right: 1rem;
+    max-width: 170px;
+    padding: 0.8rem 1rem;
+  }
+
+  .game-legend-title {
+    font-size: 1.15rem;
+  }
+
+  .game-legend-text {
+    font-size: 0.72rem;
+  }
+
+  .game-legend-list {
+    font-size: 0.75rem;
+  }
+}
+
 /* ---------- scene (pinned walking stage) ---------- */
 
 .scene {
