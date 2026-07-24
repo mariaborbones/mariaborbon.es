@@ -951,7 +951,7 @@ a:hover {
     "equipo center hago"
     "valores voz familia";
   gap: 1.5rem;
-  align-items: stretch;
+  align-items: start;
 }
 
 .wl-formacion { grid-area: formacion; }
@@ -973,10 +973,22 @@ a:hover {
   box-shadow: 3px 4px 0 rgba(0, 0, 0, 0.06);
   padding: 1.2rem 1.4rem;
   overflow-wrap: break-word;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .wl-node:nth-child(odd) { transform: rotate(-0.6deg); }
 .wl-node:nth-child(even) { transform: rotate(0.6deg); }
+
+.wl-node:hover,
+.wl-node:focus-visible {
+  box-shadow: 5px 6px 0 rgba(0, 0, 0, 0.08);
+}
+
+.wl-node:focus-visible {
+  outline: 2px solid var(--node-color);
+  outline-offset: 3px;
+}
 
 .wl-formacion { --node-color: #2a5adf; }
 .wl-rol { --node-color: #7c5cbf; }
@@ -987,16 +999,73 @@ a:hover {
 .wl-voz { --node-color: #d84315; }
 .wl-familia { --node-color: #ff5c8a; }
 
+.wl-head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
 .wl-node h3 {
   font-family: "Caveat", "Segoe UI", sans-serif;
   font-size: 1.6rem;
   font-weight: 700;
   color: var(--node-color);
-  margin: 0.15rem 0 0.35rem;
+  margin: 0;
+  flex: 1;
 }
 
 .wl-icon {
   font-size: 1.5rem;
+}
+
+.wl-chevron {
+  flex-shrink: 0;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  border: 2px solid var(--node-color);
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.wl-chevron::before,
+.wl-chevron::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: var(--node-color);
+  transform: translate(-50%, -50%);
+}
+
+.wl-chevron::before {
+  width: 0.7rem;
+  height: 2px;
+}
+
+.wl-chevron::after {
+  width: 2px;
+  height: 0.7rem;
+}
+
+.wl-node.open .wl-chevron {
+  transform: rotate(45deg);
+}
+
+.wl-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s ease;
+}
+
+.wl-node.open .wl-body {
+  grid-template-rows: 1fr;
+}
+
+.wl-body-inner {
+  overflow: hidden;
+  min-height: 0;
+  padding-top: 0.7rem;
 }
 
 .wl-node p {

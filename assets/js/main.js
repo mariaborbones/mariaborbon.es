@@ -183,4 +183,21 @@ function setupWalkScene() {
 
 window.addEventListener("load", () => {
   setupWalkScene();
+  setupWorklifeCards();
 });
+
+function setupWorklifeCards() {
+  document.querySelectorAll(".wl-node").forEach((node) => {
+    const toggle = () => {
+      const isOpen = node.classList.toggle("open");
+      node.setAttribute("aria-expanded", String(isOpen));
+    };
+    node.addEventListener("click", toggle);
+    node.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        toggle();
+      }
+    });
+  });
+}
