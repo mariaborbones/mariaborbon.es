@@ -44,7 +44,9 @@ a:hover {
 }
 
 .logo {
-  font-weight: 600;
+  font-family: "Caveat", "Segoe UI", sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
   letter-spacing: 0.02em;
   color: #fff;
 }
@@ -256,7 +258,7 @@ a:hover {
   align-items: center;
   gap: 0.4rem;
   background: #fff;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.1rem;
   border-radius: 999px;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
   font-weight: 600;
@@ -264,7 +266,14 @@ a:hover {
 }
 
 .sign-icon {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
+}
+
+.sign-label {
+  font-family: "Caveat", "Segoe UI", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-accent);
 }
 
 /* buildings */
@@ -511,6 +520,10 @@ a:hover {
 
 .sign-gym {
   background: #2e2b3d;
+  color: #fff;
+}
+
+.sign-gym .sign-label {
   color: #fff;
 }
 
@@ -979,7 +992,10 @@ a:hover {
 }
 
 .caption-title {
-  font-size: 2rem;
+  font-family: "Caveat", "Segoe UI", sans-serif;
+  font-size: 3.4rem;
+  font-weight: 700;
+  color: var(--color-accent);
   margin: 0 0 0.4rem;
   opacity: 0;
   transition: opacity 0.4s ease;
@@ -1470,6 +1486,14 @@ main {
   }
 
   .caption-title {
-    font-size: 1.5rem;
+    font-size: 2.3rem;
+  }
+
+  .sign-label {
+    font-size: 1.15rem;
+  }
+
+  .sign-icon {
+    font-size: 1.05rem;
   }
 }
