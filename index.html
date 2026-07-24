@@ -24,12 +24,29 @@
   <section class="scene">
     <div class="game-legend">
       <p class="game-legend-title">🎮 Cómo jugar</p>
-      <p class="game-legend-text">Desliza para caminar por mi día. Al pasar bajo un bloque <strong>❓</strong> se abre solo y desbloquea un momento:</p>
-      <ul class="game-legend-list">
-        <li><span aria-hidden="true">💪</span> Salud</li>
-        <li><span aria-hidden="true">🧠</span> Conocimiento</li>
-        <li><span aria-hidden="true">❤️</span> Amor</li>
-      </ul>
+      <p class="game-legend-text">Desliza para caminar por mi día. Cada bloque <strong>❓</strong> se abre solo y hace subir una barra:</p>
+      <div class="game-stats">
+        <div class="stat-item">
+          <span class="stat-icon">🔋</span>
+          <div class="stat-track"><div class="stat-fill fill-battery"></div></div>
+          <span class="stat-value value-battery">100%</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-icon">💪</span>
+          <div class="stat-track"><div class="stat-fill fill-health"></div></div>
+          <span class="stat-value value-health">0%</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-icon">🧠</span>
+          <div class="stat-track"><div class="stat-fill fill-knowledge"></div></div>
+          <span class="stat-value value-knowledge">0%</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-icon">❤️</span>
+          <div class="stat-track"><div class="stat-fill fill-love"></div></div>
+          <span class="stat-value value-love">0%</span>
+        </div>
+      </div>
     </div>
 
     <div class="sky"></div>

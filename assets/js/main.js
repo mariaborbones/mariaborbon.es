@@ -3,13 +3,13 @@ document.getElementById("year").textContent = new Date().getFullYear();
 gsap.registerPlugin(ScrollTrigger);
 
 const zones = [
-  { eyebrow: "06:00", title: "Gimnasio", subtitle: "Sola, antes de que empiece el día" },
-  { eyebrow: "06:30", title: "Ducha y desayuno", subtitle: "En casa, con calma" },
-  { eyebrow: "07:00", title: "Camino al trabajo", subtitle: "En coche, con la radio de fondo" },
-  { eyebrow: "07:30", title: "Verti", subtitle: "Empieza la jornada" },
-  { eyebrow: "18:00", title: "Colegio", subtitle: "A recoger a mis peques, todavía sola" },
-  { eyebrow: "18:15", title: "Súper", subtitle: "La compra de cada día, ya en compañía" },
-  { eyebrow: "18:45", title: "En casa", subtitle: "A jugar todos juntos" },
+  { eyebrow: "06:00", title: "Gimnasio", subtitle: "Sola, antes de que empiece el día", stats: { battery: 100, love: 15, health: 20, knowledge: 15 } },
+  { eyebrow: "06:30", title: "Ducha y desayuno", subtitle: "En casa, con calma", stats: { battery: 90, love: 15, health: 70, knowledge: 15 } },
+  { eyebrow: "07:00", title: "Camino al trabajo", subtitle: "En coche, con la radio de fondo", stats: { battery: 84, love: 15, health: 70, knowledge: 15 } },
+  { eyebrow: "07:30", title: "Verti", subtitle: "Empieza la jornada", stats: { battery: 76, love: 15, health: 70, knowledge: 20 } },
+  { eyebrow: "18:00", title: "Colegio", subtitle: "A recoger a mis peques, todavía sola", stats: { battery: 50, love: 15, health: 70, knowledge: 75 } },
+  { eyebrow: "18:15", title: "Súper", subtitle: "La compra de cada día, ya en compañía", stats: { battery: 42, love: 40, health: 70, knowledge: 75 } },
+  { eyebrow: "18:45", title: "En casa", subtitle: "A jugar todos juntos", stats: { battery: 34, love: 58, health: 70, knowledge: 75 } },
 ];
 
 const DRIVING_ZONE = 2;
@@ -32,6 +32,14 @@ const mumFigure = document.querySelector(".mum");
 const mumJump = document.querySelector(".mum-jump");
 const kidsGroup = document.querySelector(".kids-group");
 const familyCar = document.querySelector(".family-car");
+const fillBattery = document.querySelector(".fill-battery");
+const fillLove = document.querySelector(".fill-love");
+const fillHealth = document.querySelector(".fill-health");
+const fillKnowledge = document.querySelector(".fill-knowledge");
+const valueBattery = document.querySelector(".value-battery");
+const valueLove = document.querySelector(".value-love");
+const valueHealth = document.querySelector(".value-health");
+const valueKnowledge = document.querySelector(".value-knowledge");
 
 const gait = [
   { figure: document.querySelector(".girl"), amplitude: 26, phase: 0.7 },
@@ -49,10 +57,10 @@ const wheels = document.querySelectorAll(".stroller-wheel, .car-wheel");
 
 const zoneEls = document.querySelectorAll(".zone");
 const rewardBoxes = [
-  { zoneIndex: 0 },
-  { zoneIndex: 3 },
-  { zoneIndex: 4, revealsKids: true },
-  { zoneIndex: 5 },
+  { zoneIndex: 0, stats: zones[1].stats },
+  { zoneIndex: 3, stats: zones[4].stats },
+  { zoneIndex: 4, stats: zones[KIDS_JOIN_ZONE].stats, revealsKids: true },
+  { zoneIndex: 5, stats: zones[6].stats },
 ].map((box) => {
   const el = zoneEls[box.zoneIndex].querySelector(".question-block");
   return {
@@ -107,6 +115,18 @@ function triggerBonk(icon, blockEl) {
   );
 }
 
+function updateStats(stats) {
+  gsap.to(fillBattery, { width: `${stats.battery}%`, duration: 0.6, ease: "power1.out", overwrite: true });
+  gsap.to(fillLove, { width: `${stats.love}%`, duration: 0.6, ease: "power1.out", overwrite: true });
+  gsap.to(fillHealth, { width: `${stats.health}%`, duration: 0.6, ease: "power1.out", overwrite: true });
+  gsap.to(fillKnowledge, { width: `${stats.knowledge}%`, duration: 0.6, ease: "power1.out", overwrite: true });
+
+  valueBattery.textContent = `${Math.round(stats.battery)}%`;
+  valueLove.textContent = `${Math.round(stats.love)}%`;
+  valueHealth.textContent = `${Math.round(stats.health)}%`;
+  valueKnowledge.textContent = `${Math.round(stats.knowledge)}%`;
+}
+
 function checkKidsVisibility(distance) {
   const shouldShow = kidsRewardBox.worldX - distance <= mumCenterX;
   if (shouldShow !== kidsVisible) {
@@ -121,6 +141,7 @@ function checkRewardBoxes(distance) {
     if (box.worldX - distance <= mumCenterX) {
       box.hit = true;
       box.el.classList.add("hit");
+      updateStats(box.stats);
       triggerBonk(box.icon, box.el);
     }
   });
@@ -169,6 +190,7 @@ function setupWalkScene() {
         if (zoneIndex !== lastZoneIndex) {
           updateCaption(zoneIndex);
           updateCharacters(zoneIndex);
+          updateStats(zones[zoneIndex].stats);
           lastZoneIndex = zoneIndex;
         }
       },
@@ -177,6 +199,7 @@ function setupWalkScene() {
 
   updateCaption(0);
   updateCharacters(0);
+  updateStats(zones[0].stats);
 
   return scrollTween;
 }
