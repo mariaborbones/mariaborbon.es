@@ -5,10 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>María Borbonés</title>
   <meta name="description" content="Sitio web personal de María Borbonés — madre, AI lover, y creadora de proyectos personales y profesionales">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <header class="site-header">
+  <header class="site-header" id="top">
     <span class="logo">María Borbonés</span>
     <a class="header-contact" href="mailto:borgarmar@gmail.com">Contacto</a>
   </header>
@@ -16,30 +19,6 @@
   <div class="scroll-cue">
     <span>Desliza para vivir mi día</span>
     <span class="scroll-cue-arrow">→</span>
-  </div>
-
-  <div class="stats-hud">
-    <p class="stats-hud-title">Mi día</p>
-    <div class="stat-item">
-      <span class="stat-icon">🔋</span>
-      <div class="stat-track"><div class="stat-fill fill-battery"></div></div>
-      <span class="stat-value value-battery">100%</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-icon">❤️</span>
-      <div class="stat-track"><div class="stat-fill fill-love"></div></div>
-      <span class="stat-value value-love">0%</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-icon">💪</span>
-      <div class="stat-track"><div class="stat-fill fill-health"></div></div>
-      <span class="stat-value value-health">0%</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-icon">🧠</span>
-      <div class="stat-track"><div class="stat-fill fill-knowledge"></div></div>
-      <span class="stat-value value-knowledge">0%</span>
-    </div>
   </div>
 
   <section class="scene">
@@ -173,35 +152,101 @@
     <div class="progress-track"><div class="progress-fill"></div></div>
   </section>
 
-  <section class="evening">
-    <div class="evening-card">
-      <span class="evening-icon">🛁</span>
-      <p class="evening-time">19:30</p>
-      <h3>Duchas de los peques</h3>
+  <section class="worklife" id="worklife">
+    <div class="worklife-intro">
+      <p class="section-eyebrow">Después del día a día</p>
+      <h2 class="worklife-title">Mi vida profesional, en una pizarra</h2>
     </div>
-    <div class="evening-card">
-      <span class="evening-icon">🍽️</span>
-      <p class="evening-time">20:00</p>
-      <h3>Cocinamos y cenamos</h3>
-    </div>
-    <div class="evening-card">
-      <span class="evening-icon">📖</span>
-      <p class="evening-time">20:30</p>
-      <h3>Cuento y a dormir</h3>
+
+    <div class="worklife-board">
+      <div class="worklife-grid">
+
+        <div class="wl-node wl-formacion">
+          <span class="wl-icon">🎓</span>
+          <h3>Formación</h3>
+          <p>Ingeniería Informática + Máster en IA<br>Universidad Politécnica de Madrid</p>
+        </div>
+
+        <div class="wl-node wl-rol">
+          <span class="wl-icon">🧠</span>
+          <h3>Mi rol</h3>
+          <p>Responsable de Datos e IA para Clientes</p>
+          <p class="wl-tag">Verti Seguros</p>
+        </div>
+
+        <div class="wl-node wl-trayectoria">
+          <span class="wl-icon">💼</span>
+          <h3>Trayectoria</h3>
+          <p>10 años en IBM — Cloud, Mobile e IA<br>Solutions Architect &amp; Client Engineering Manager</p>
+        </div>
+
+        <div class="wl-node wl-equipo">
+          <span class="wl-icon">🤝</span>
+          <h3>Con quién trabajo</h3>
+          <ul class="wl-people">
+            <li><span class="wl-avatar wl-avatar-a" aria-hidden="true">👤</span>Equipo de datos e IA</li>
+            <li><span class="wl-avatar wl-avatar-b" aria-hidden="true">👤</span>Negocio y clientes</li>
+            <li><span class="wl-avatar wl-avatar-c" aria-hidden="true">👤</span>Liderazgo de Verti</li>
+          </ul>
+        </div>
+
+        <div class="wl-center">
+          <div class="wl-photo-wrap">
+            <img class="wl-photo" src="assets/img/maria-worklife.jpg" alt="María Borbonés">
+          </div>
+          <p class="wl-name">María Borbonés</p>
+        </div>
+
+        <div class="wl-node wl-hago">
+          <span class="wl-icon">📊</span>
+          <h3>Qué hago</h3>
+          <p>Estrategia de datos e IA agéntica aplicada a seguros, prompting y modelos para negocio</p>
+        </div>
+
+        <div class="wl-node wl-valores">
+          <span class="wl-icon">🌱</span>
+          <h3>Valores</h3>
+          <p>Cofundadora de <strong>Big Girls Theory</strong> — mujeres en tecnología. IA responsable y aprendizaje continuo</p>
+        </div>
+
+        <div class="wl-node wl-voz">
+          <span class="wl-icon">🎤</span>
+          <h3>Voz pública</h3>
+          <p>Profesora en IE University · Ponente en OpenExpo · Divulgación de IA</p>
+        </div>
+
+        <div class="wl-node wl-familia">
+          <span class="wl-icon">❤️</span>
+          <h3>Familia</h3>
+          <p>Lo que me espera al llegar a casa — <a href="#top">vuelve arriba y vive mi día ↑</a></p>
+        </div>
+
+      </div>
     </div>
   </section>
 
   <main>
     <section id="work" class="content-section">
-      <p class="section-eyebrow">Trabajo</p>
-      <h2>Proyectos</h2>
-      <p>Un espacio para compartir lo que construyo, personal y profesionalmente.</p>
-      <ul class="project-list">
-        <li>
-          <h3>Próximamente</h3>
-          <p>Aquí iré añadiendo mis proyectos a medida que los publique.</p>
-        </li>
-      </ul>
+      <p class="section-eyebrow">Fuera del trabajo</p>
+      <h2>Proyectos personales</h2>
+      <p>Un espacio para compartir lo que construyo por mi cuenta.</p>
+      <div class="project-grid">
+        <article class="project-card">
+          <span class="project-icon">🚧</span>
+          <h3>Proyecto 1</h3>
+          <p>Próximamente.</p>
+        </article>
+        <article class="project-card">
+          <span class="project-icon">🚧</span>
+          <h3>Proyecto 2</h3>
+          <p>Próximamente.</p>
+        </article>
+        <article class="project-card">
+          <span class="project-icon">🚧</span>
+          <h3>Proyecto 3</h3>
+          <p>Próximamente.</p>
+        </article>
+      </div>
     </section>
 
     <section id="contact" class="content-section">
