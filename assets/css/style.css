@@ -51,9 +51,61 @@ a:hover {
   color: #fff;
 }
 
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.header-social {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.social-link {
+  display: flex;
+  color: #fff;
+  opacity: 0.85;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.social-link:hover,
+.social-link:focus-visible {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
 .header-contact {
   font-size: 0.9rem;
   color: #fff;
+}
+
+@media (max-width: 480px) {
+  .site-header {
+    padding: 1rem 1.25rem;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+  }
+
+  .header-right {
+    gap: 0.9rem;
+  }
+
+  .header-social {
+    gap: 0.7rem;
+  }
+
+  .social-link svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .header-contact {
+    font-size: 0.78rem;
+  }
 }
 
 .scroll-cue {
